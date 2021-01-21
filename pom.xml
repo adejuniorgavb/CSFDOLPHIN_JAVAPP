@@ -1,0 +1,158 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>CSFDolphinJavaApp</groupId>
+  <artifactId>CSFDolphinJavaApp</artifactId>
+  <version>0.2.1-SNAPSHOT</version>
+  <name>${project.artifactId}</name>
+   <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <encoding>UTF-8</encoding>
+    <scala.version>2.11</scala.version>
+  </properties>
+  <dependencies>
+  
+    
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-client</artifactId>
+        <version>3.0.0</version>
+        <!--
+        <version>2.7.3</version>
+        -->
+    </dependency>
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-common</artifactId>
+        <version>3.0.0</version>
+        <!--
+        <version>2.7.3</version>
+        -->
+    </dependency>
+    <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>1.2.1</version>
+    </dependency>
+    
+    
+    <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
+	<dependency>
+    	<groupId>org.apache.hbase</groupId>
+    	<artifactId>hbase-client</artifactId>
+    	<version>1.1.2</version>
+<!--    	<scope>provided</scope>-->
+	</dependency>
+    <dependency>
+    	<groupId>org.apache.hbase</groupId>
+    	<artifactId>hbase-common</artifactId>
+    	<version>1.1.2</version>
+<!--    	<scope>provided</scope>-->
+	</dependency>
+	
+	<dependency>
+         <groupId>com.google.apis</groupId>
+         <artifactId>google-api-services-analyticsreporting</artifactId>
+         <version>v4-rev153-1.25.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.google.api-client</groupId>
+    	<artifactId>google-api-client-gson</artifactId>
+    	<version>1.30.5</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>com.google.oauth-client</groupId>
+    	<artifactId>google-oauth-client-jetty</artifactId>
+    	<version>1.30.4</version>
+	</dependency>
+	
+    <dependency>
+      	<groupId>com.google.apis</groupId>
+      	<artifactId>google-api-services-calendar</artifactId>
+      	<version>v3-rev379-1.25.0</version>
+    </dependency>
+	
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+	<dependency>
+	    <groupId>com.google.guava</groupId>
+	    <artifactId>guava</artifactId>
+	    <version>18.0</version>
+	</dependency>
+	
+	<dependency>
+        <groupId>com.typesafe</groupId>
+        <artifactId>config</artifactId>
+        <version>1.3.1</version>
+    </dependency>
+        
+    	      
+  </dependencies>
+  <build>
+    <resources>
+         <resource>
+             <directory>src/resources/${dolphin.environment}</directory>
+             <filtering>true</filtering>
+         </resource>
+    </resources>
+  
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-assembly-plugin</artifactId>
+           <version>2.4</version>
+           <configuration>
+               <descriptorRefs>
+                   <descriptorRef>jar-with-dependencies</descriptorRef>
+               </descriptorRefs>
+               <!--                     <archive> -->
+               <!--                         <manifest> -->
+               <!--                             <mainClass>br.com.vivo.urm.datasets.DMobileTariffPlan</mainClass> -->
+               <!--                         </manifest> -->
+               <!--                     </archive> -->
+           </configuration>
+           <executions>
+               <execution>
+                   <phase>package</phase>
+                   <goals>
+                       <goal>single</goal>
+                   </goals>
+               </execution>
+           </executions>
+       </plugin>
+    </plugins>
+  </build>
+  <profiles>
+      <profile>
+          <id>dev</id>
+          <properties>
+              <dolphin.environment>dev</dolphin.environment>
+          </properties>
+          <activation>
+              <activeByDefault>true</activeByDefault>
+          </activation>
+      </profile>
+      <profile>
+          <id>prod</id>
+          <properties>
+              <dolphin.environment>prod</dolphin.environment>
+          </properties>
+      </profile>
+      <profile>
+          <id>qa</id>
+          <properties>
+              <dolphin.environment>qa</dolphin.environment>
+          </properties>
+      </profile>
+  </profiles>  
+  
+</project>
