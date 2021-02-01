@@ -1,5 +1,0 @@
-com/carrefour/dolphin/utils/HBase.class
-com/carrefour/dolphin/controlload/ControlLoad.class
-com/carrefour/dolphin/ingestioncontrol/ControlExec.class
-com/carrefour/dolphin/utils/PropertiesCSF.class
-com/carrefour/dolphin/utils/LogCSF.class
